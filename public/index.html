@@ -1,1 +1,93 @@
-<!-- noop -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marketing Hub: tu departamento de marketing virtual para pequeñas empresas." />
+  <title>Marketing Hub</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/sidebar-fixes.css" />
+  <link rel="stylesheet" href="/ui-enhancements.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark">M</span>
+        <span class="brand-name">Marketing Hub</span>
+        <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Ocultar menú" title="Ocultar menú" onclick="toggleSidebar()">‹</button>
+      </div>
+      <div class="workspace">
+        <span class="workspace-dot"></span>
+        <div class="workspace-copy"><strong>La Esquina</strong><small>Restaurante · Demo</small></div>
+      </div>
+      <nav aria-label="Navegación principal">
+        <a href="#dashboard" data-route="dashboard"><span class="nav-icon">⌂</span><span>Dashboard</span></a>
+        <a href="#analytics" data-route="analytics"><span class="nav-icon">▥</span><span>Analytics</span></a>
+        <a href="#recommendations" data-route="recommendations"><span class="nav-icon">◇</span><span>Recomendaciones</span></a>
+        <a href="#advertising" data-route="advertising"><span class="nav-icon">◈</span><span>Publicidad</span></a>
+        <a href="#calendar" data-route="calendar"><span class="nav-icon">□</span><span>Calendario</span></a>
+        <a href="#content" data-route="content"><span class="nav-icon">▧</span><span>Contenido</span></a>
+        <a href="#customers" data-route="customers"><span class="nav-icon">♙</span><span>Clientes</span></a>
+        <a href="#website" data-route="website"><span class="nav-icon">◎</span><span>Sitio Web</span></a>
+        <a href="#ai" data-route="ai"><span class="nav-icon">✦</span><span>Marketing Manager AI</span></a>
+        <a href="#integrations" data-route="integrations"><span class="nav-icon">↗</span><span>Integraciones</span></a>
+      </nav>
+      <button class="sidebar-profile" id="onboardingBtn" type="button" onclick="document.getElementById('modalBackdrop').classList.remove('hidden')" aria-label="Editar perfil del negocio" title="Editar perfil del negocio">
+        <span class="profile-avatar">L</span>
+        <span class="profile-copy"><strong>La Esquina</strong><small>demo@marketinghub.com</small></span>
+        <span class="profile-chevron">⌄</span>
+      </button>
+    </aside>
+    <main class="main" id="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menú">☰</button>
+        <div><p class="eyebrow">Marketing Hub</p><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="top-actions"><span class="demo-badge">Datos demo</span><button class="secondary-btn" id="refreshBtn">Actualizar</button></div>
+      </header>
+      <div id="app" class="content"></div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop hidden" id="modalBackdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><p class="eyebrow">Configuración</p><h2 id="modalTitle">Tu negocio</h2></div><button class="icon-btn" onclick="document.getElementById('modalBackdrop').classList.add('hidden')" aria-label="Cerrar">×</button></div>
+      <form id="onboardingForm" class="form-grid">
+        <label>¿Cómo se llama tu negocio?<input name="businessName" value="La Esquina" required /></label>
+        <label>¿Qué tipo de negocio tenés?<select name="businessType"><option selected>Restaurante</option><option>Retail / ropa</option><option>Servicios</option><option>Profesional</option><option>Otro</option></select></label>
+        <label>¿Qué objetivo querés conseguir?<select name="objective"><option>Conseguir más clientes</option><option selected>Aumentar ventas</option><option>Mejorar redes</option><option>Mejorar publicidad</option><option>Fidelizar clientes</option></select></label>
+        <button class="primary-btn" type="submit">Guardar perfil</button>
+      </form>
+    </section>
+  </div>
+  <script src="/app.js" defer></script>
+  <script src="/ui-enhancements.js" defer></script>
+  <script>
+    function toggleSidebar(){
+      const sidebar=document.getElementById('sidebar');
+      const main=document.getElementById('main');
+      const button=document.getElementById('sidebarToggle');
+      const collapsed=sidebar.classList.toggle('collapsed');
+      main.classList.toggle('sidebar-collapsed',collapsed);
+      localStorage.setItem('mh_sidebar_collapsed',collapsed?'1':'0');
+      button.textContent=collapsed?'›':'‹';
+      button.setAttribute('aria-label',collapsed?'Mostrar menú':'Ocultar menú');
+      button.title=collapsed?'Mostrar menú':'Ocultar menú';
+    }
+    window.addEventListener('DOMContentLoaded',()=>{
+      const sidebar=document.getElementById('sidebar');
+      const main=document.getElementById('main');
+      const button=document.getElementById('sidebarToggle');
+      if(localStorage.getItem('mh_sidebar_collapsed')==='1' && window.innerWidth>760){
+        sidebar.classList.add('collapsed');
+        main.classList.add('sidebar-collapsed');
+        button.textContent='›';
+        button.setAttribute('aria-label','Mostrar menú');
+        button.title='Mostrar menú';
+      }
+      const f=document.getElementById('onboardingForm');
+      f.addEventListener('submit',async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f));const h=localStorage.getItem('mh_token');try{const r=await fetch('/api/onboarding',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${h}`},body:JSON.stringify(d)});if(!r.ok)throw Error('No se pudo guardar');document.getElementById('modalBackdrop').classList.add('hidden');location.reload()}catch(err){alert(err.message)}});
+    });
+  </script>
+</body>
+</html>
