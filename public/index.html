@@ -6,6 +6,7 @@
   <meta name="description" content="Marketing Hub: tu departamento de marketing virtual para pequeñas empresas." />
   <title>Marketing Hub</title>
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/sidebar-fixes.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -31,7 +32,11 @@
         <a href="#ai" data-route="ai"><span class="nav-icon">✦</span><span>Marketing Manager AI</span></a>
         <a href="#integrations" data-route="integrations"><span class="nav-icon">↗</span><span>Integraciones</span></a>
       </nav>
-      <button class="sidebar-bottom" id="onboardingBtn" onclick="document.getElementById('modalBackdrop').classList.remove('hidden')"><span class="nav-icon">⚙</span><span>Editar datos del negocio</span></button>
+      <button class="sidebar-profile" id="onboardingBtn" type="button" onclick="document.getElementById('modalBackdrop').classList.remove('hidden')" aria-label="Editar perfil del negocio" title="Editar perfil del negocio">
+        <span class="profile-avatar">L</span>
+        <span class="profile-copy"><strong>La Esquina</strong><small>demo@marketinghub.com</small></span>
+        <span class="profile-chevron">⌄</span>
+      </button>
     </aside>
     <main class="main" id="main">
       <header class="topbar">
