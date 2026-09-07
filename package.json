@@ -1,0 +1,14 @@
+{
+  "name": "marketing-hub",
+  "version": "1.0.0",
+  "description": "Marketing Hub - virtual marketing department for small businesses",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
