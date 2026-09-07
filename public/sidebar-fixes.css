@@ -1,38 +1,23 @@
 /* Refinamiento visual del sidebar */
 .sidebar{overflow:hidden}
 .sidebar nav{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding-right:5px;scrollbar-width:thin;scrollbar-color:#68717e transparent}
-.sidebar nav::-webkit-scrollbar{width:7px}
-.sidebar nav::-webkit-scrollbar-track{background:transparent}
-.sidebar nav::-webkit-scrollbar-thumb{background:#68717e;border-radius:999px}
-.sidebar nav::-webkit-scrollbar-thumb:hover{background:#87919e}
-.sidebar-profile{margin-top:auto;padding:10px 8px 2px;border-top:1px solid #383e46;color:#eef1f5;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:10px;background:transparent;border-left:0;border-right:0;border-bottom:0;text-align:left;width:100%}
-.sidebar-profile:hover{background:#2b3037}
-.profile-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;display:grid;place-items:center;background:#e8edf3;color:#20242a;font-weight:800;font-size:16px;position:relative}
-.profile-avatar:after{content:"";position:absolute;right:1px;bottom:1px;width:8px;height:8px;border-radius:50%;background:#4caf78;border:2px solid var(--sidebar)}
+.sidebar nav::-webkit-scrollbar{width:7px}.sidebar nav::-webkit-scrollbar-track{background:transparent}.sidebar nav::-webkit-scrollbar-thumb{background:#68717e;border-radius:999px}.sidebar nav::-webkit-scrollbar-thumb:hover{background:#87919e}
+.sidebar-profile{margin-top:auto;padding:10px 8px 2px;border-top:1px solid #383e46;color:#eef1f5;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:10px;background:transparent;border-left:0;border-right:0;border-bottom:0;text-align:left;width:100%}.sidebar-profile:hover{background:#2b3037}
+.profile-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;display:grid;place-items:center;background:#e8edf3;color:#20242a;font-weight:800;font-size:16px;position:relative}.profile-avatar:after{content:"";position:absolute;right:1px;bottom:1px;width:8px;height:8px;border-radius:50%;background:#4caf78;border:2px solid var(--sidebar)}
 .profile-copy{min-width:0;flex:1}.profile-copy strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.profile-copy small{display:block;color:#aeb4bc;font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.profile-chevron{color:#aeb4bc;font-size:18px;padding:0 3px}
 .sidebar-toggle{margin-left:auto;flex:0 0 32px;width:32px;height:32px;border:1px solid #4a515b;border-radius:9px;background:#2a3037;color:#eef1f5;font-size:22px;line-height:1;display:grid;place-items:center;cursor:pointer;visibility:visible;opacity:1;position:relative;z-index:2}.sidebar-toggle:hover{background:#343b44}
 .sidebar .login-card,.sidebar .login-form,.sidebar [data-login],.sidebar a[href*="login"]{display:none!important}.hidden{display:none!important}
 
-/* Mientras se muestra el login, no se debe renderizar ni mostrar la aplicación detrás. */
-body:has(#app .login-card) .app-shell{display:none!important}
-body:has(#app .login-card) #toast{display:none!important}
+/* Login: ocultar solo el chrome de la aplicación, nunca el contenedor que contiene el login. */
+body:has(#app .login-card) .sidebar,body:has(#app .login-card) .topbar{display:none!important}
 body:has(#app .login-card){background:var(--bg);min-height:100vh}
+body:has(#app .login-card) .main{margin-left:0!important;width:100%!important}
 body:has(#app .login-card) #app{width:100%;max-width:none;margin:0;padding:8vh 24px 48px;min-height:100vh;display:flex;align-items:flex-start;justify-content:center}
 body:has(#app .login-card) .login-card{width:min(460px,100%);margin:0}
 
 .modal-backdrop{position:fixed;inset:0;background:rgba(15,20,27,.42);display:flex;align-items:center;justify-content:center;padding:24px;z-index:100}.modal-backdrop.hidden{display:none!important}.modal{width:min(560px,100%);max-height:min(760px,calc(100vh - 48px));overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.2)}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:20px}.icon-btn{width:34px;height:34px;border:1px solid var(--line);background:#fff;border-radius:8px;font-size:22px;line-height:1}.icon-btn:hover{background:#f3f4f6}
 
 /* Estado colapsado: se desplaza hacia la izquierda y deja solo los iconos. M y L conservan su tamaño y aspecto. */
-.sidebar.collapsed{width:114px;padding-left:18px;padding-right:18px}
-.main.sidebar-collapsed{margin-left:114px;width:calc(100% - 114px)}
-.sidebar.collapsed .brand{justify-content:flex-start;gap:0;padding-left:0;padding-right:0}
-.sidebar.collapsed .brand-mark{flex:0 0 auto}
-.sidebar.collapsed .brand-name,.sidebar.collapsed .workspace-copy,.sidebar.collapsed nav a span:not(.nav-icon),.sidebar.collapsed .profile-copy,.sidebar.collapsed .profile-chevron{display:none!important}
-.sidebar.collapsed .workspace{justify-content:center;padding:13px 10px}
-.sidebar.collapsed nav a{display:flex;align-items:center;justify-content:center;padding:10px 7px}
-.sidebar.collapsed .nav-icon{display:inline-grid;place-items:center;font-size:19px;width:28px;min-width:28px;margin-right:0}
-.sidebar.collapsed .sidebar-profile{justify-content:flex-start;padding:10px 8px 2px}
-.sidebar.collapsed .profile-avatar{flex:0 0 40px}
-.sidebar.collapsed .sidebar-toggle{position:absolute;top:31px;right:-1px;width:30px;height:30px;border-radius:8px}
-
+.sidebar.collapsed{width:114px;padding-left:18px;padding-right:18px}.main.sidebar-collapsed{margin-left:114px;width:calc(100% - 114px)}
+.sidebar.collapsed .brand{justify-content:flex-start;gap:0;padding-left:0;padding-right:0}.sidebar.collapsed .brand-mark{flex:0 0 auto}.sidebar.collapsed .brand-name,.sidebar.collapsed .workspace-copy,.sidebar.collapsed nav a span:not(.nav-icon),.sidebar.collapsed .profile-copy,.sidebar.collapsed .profile-chevron{display:none!important}.sidebar.collapsed .workspace{justify-content:center;padding:13px 10px}.sidebar.collapsed nav a{display:flex;align-items:center;justify-content:center;padding:10px 7px}.sidebar.collapsed .nav-icon{display:inline-grid;place-items:center;font-size:19px;width:28px;min-width:28px;margin-right:0}.sidebar.collapsed .sidebar-profile{justify-content:flex-start;padding:10px 8px 2px}.sidebar.collapsed .profile-avatar{flex:0 0 40px}.sidebar.collapsed .sidebar-toggle{position:absolute;top:31px;right:-1px;width:30px;height:30px;border-radius:8px}
 @media(max-width:760px){.sidebar-profile{display:flex}.sidebar.collapsed{width:280px;padding-left:16px;padding-right:16px}.main.sidebar-collapsed{margin-left:0;width:100%}.sidebar.collapsed .brand-name,.sidebar.collapsed .workspace-copy,.sidebar.collapsed nav a span:not(.nav-icon),.sidebar.collapsed .profile-copy,.sidebar.collapsed .profile-chevron{display:inline!important}.sidebar.collapsed .workspace{justify-content:flex-start;padding:13px 10px}.sidebar.collapsed nav a{justify-content:flex-start;padding:10px 11px}.sidebar.collapsed .nav-icon{margin-right:7px}.sidebar.collapsed .sidebar-profile{justify-content:flex-start;padding:10px 8px 2px}.sidebar.collapsed .sidebar-toggle{position:static;margin-left:auto}}
