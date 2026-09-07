@@ -15,7 +15,6 @@
       <div class="brand">
         <span class="brand-mark">M</span>
         <span class="brand-name">Marketing Hub</span>
-        <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Ocultar menú" title="Ocultar menú" onclick="toggleSidebar()">‹</button>
       </div>
       <div class="workspace">
         <span class="workspace-dot"></span>
@@ -63,28 +62,10 @@
   <script src="/app.js" defer></script>
   <script src="/ui-enhancements.js" defer></script>
   <script>
-    function toggleSidebar(){
-      const sidebar=document.getElementById('sidebar');
-      const main=document.getElementById('main');
-      const button=document.getElementById('sidebarToggle');
-      const collapsed=sidebar.classList.toggle('collapsed');
-      main.classList.toggle('sidebar-collapsed',collapsed);
-      localStorage.setItem('mh_sidebar_collapsed',collapsed?'1':'0');
-      button.textContent=collapsed?'›':'‹';
-      button.setAttribute('aria-label',collapsed?'Mostrar menú':'Ocultar menú');
-      button.title=collapsed?'Mostrar menú':'Ocultar menú';
-    }
     window.addEventListener('DOMContentLoaded',()=>{
-      const sidebar=document.getElementById('sidebar');
-      const main=document.getElementById('main');
-      const button=document.getElementById('sidebarToggle');
-      if(localStorage.getItem('mh_sidebar_collapsed')==='1' && window.innerWidth>760){
-        sidebar.classList.add('collapsed');
-        main.classList.add('sidebar-collapsed');
-        button.textContent='›';
-        button.setAttribute('aria-label','Mostrar menú');
-        button.title='Mostrar menú';
-      }
+      // El menú lateral permanece expandido en desktop para evitar una navegación
+      // demasiado críptica con solo iconos. En móvil se usa el menú hamburguesa.
+      localStorage.removeItem('mh_sidebar_collapsed');
       const f=document.getElementById('onboardingForm');
       f.addEventListener('submit',async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f));const h=localStorage.getItem('mh_token');try{const r=await fetch('/api/onboarding',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${h}`},body:JSON.stringify(d)});if(!r.ok)throw Error('No se pudo guardar');document.getElementById('modalBackdrop').classList.add('hidden');location.reload()}catch(err){alert(err.message)}});
     });
