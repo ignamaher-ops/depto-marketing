@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marketing Hub: tu departamento de marketing virtual para pequeñas empresas." />
+  <title>Marketing Hub</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">M</span><span>Marketing Hub</span></div>
+      <div class="workspace"><span class="workspace-dot"></span><div><strong>La Esquina</strong><small>Restaurante</small></div></div>
+      <nav aria-label="Navegación principal">
+        <a href="#dashboard" data-route="dashboard">Dashboard</a>
+        <a href="#analytics" data-route="analytics">Analytics</a>
+        <a href="#recommendations" data-route="recommendations">Recomendaciones</a>
+        <a href="#advertising" data-route="advertising">Publicidad</a>
+        <a href="#calendar" data-route="calendar">Calendario</a>
+        <a href="#content" data-route="content">Contenido</a>
+        <a href="#customers" data-route="customers">Clientes</a>
+        <a href="#website" data-route="website">Sitio Web</a>
+        <a href="#ai" data-route="ai">Marketing Manager AI</a>
+        <a href="#integrations" data-route="integrations">Integraciones</a>
+      </nav>
+      <button class="sidebar-bottom" id="onboardingBtn">Editar datos del negocio</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menú">☰</button>
+        <div>
+          <p class="eyebrow">Marketing Hub</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <span class="demo-badge">Datos demo</span>
+          <button class="secondary-btn" id="refreshBtn">Actualizar</button>
+        </div>
+      </header>
+
+      <div id="app" class="content"></div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop hidden" id="modalBackdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><p class="eyebrow">Configuración inicial</p><h2 id="modalTitle">Tu negocio</h2></div><button class="icon-btn" id="closeModal" aria-label="Cerrar">×</button></div>
+      <form id="onboardingForm" class="form-grid">
+        <label>¿Cómo se llama tu negocio?<input name="businessName" value="La Esquina" required /></label>
+        <label>¿Qué tipo de negocio tenés?<select name="businessType"><option>Restaurante</option><option>Retail / ropa</option><option>Servicios</option><option>Profesional</option><option>Otro</option></select></label>
+        <label>¿Qué objetivo querés conseguir?<select name="objective"><option>Conseguir más clientes</option><option selected>Aumentar ventas</option><option>Mejorar redes</option><option>Mejorar publicidad</option><option>Fidelizar clientes</option></select></label>
+        <button class="primary-btn" type="submit">Guardar perfil</button>
+      </form>
+    </section>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
